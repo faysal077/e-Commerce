@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Coupons</h2>
+
+{% for coupon in coupons %}
+
+<p>{{coupon.code}} - {{coupon.discount}}%</p>
+
+{% endfor %}
+
+{% endblock %}

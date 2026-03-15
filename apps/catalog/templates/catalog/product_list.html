@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Products</h2>
+
+{% for product in products %}
+
+<a href="/catalog/product/{{product.slug}}/">
+
+<p>{{product.name}} - {{product.price}}</p>
+
+</a>
+
+{% endfor %}
+
+{% endblock %}

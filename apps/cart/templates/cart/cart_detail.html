@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Your Cart</h2>
+
+{% for item in items %}
+
+<p>{{item.product.name}} - Qty: {{item.quantity}}</p>
+
+<a href="/cart/remove/{{item.product.id}}/">Remove</a>
+
+{% endfor %}
+
+<a href="/orders/checkout/">Checkout</a>
+
+{% endblock %}

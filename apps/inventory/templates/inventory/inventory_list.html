@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Inventory</h2>
+
+{% for i in inventory %}
+
+<p>{{i.product.name}} - Stock: {{i.stock}}</p>
+
+{% endfor %}
+
+{% endblock %}

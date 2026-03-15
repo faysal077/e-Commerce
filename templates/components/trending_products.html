@@ -1,0 +1,44 @@
+<section class="py-12 bg-[#FDF5F7]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-bold text-gray-900 uppercase tracking-widest">Trending Now</h2>
+            <div class="h-1 w-16 bg-[#C24464] mx-auto mt-2"></div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+            {% for product in products %}
+            <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group border border-gray-100">
+                <div class="aspect-[3/4] overflow-hidden relative">
+                    <div class="aspect-[3/4] overflow-hidden relative">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" 
+                                alt="{{ product.name }}" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        {% else %}
+                            <img src="https://picsum.photos/seed/trending{{ forloop.counter }}/600/800" 
+                                alt="{{ product.name }}" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        {% endif %}
+
+                        <div class="absolute top-2 left-2">
+                            <span class="bg-[#C24464] text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">Trending</span>
+                        </div>
+
+                    </div>
+                    
+                    <div class="absolute top-2 left-2">
+                        <span class="bg-[#C24464] text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-tighter">Trending</span>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <button class="w-full bg-[#C24464] text-white py-2 rounded-md text-sm font-bold uppercase tracking-wider hover:bg-[#a33852]">Quick View</button>
+                    </div>
+                </div>
+                <div class="p-4 text-center">
+                    <h4 class="text-sm font-bold text-gray-800 mb-2 truncate group-hover:text-[#C24464] transition-colors">{{product.name}}</h4>
+                    <p class="text-base font-black text-[#C24464]">{{product.price}} BDT</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
