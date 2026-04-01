@@ -13,7 +13,14 @@ def product_detail(request, slug):
 
     product = get_object_or_404(Product, slug=slug)
 
-    return render(request, "catalog/product_detail.html", {"product": product})
+    related_products = Product.objects.filter(
+        category=product.category
+    ).exclude(id=product.id)[:4]
+
+    return render(request, "catalog/product_detail.html", {
+        "product": product,
+        "related_products": related_products
+    })
 
 
 def category_products(request, slug):

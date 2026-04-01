@@ -2,12 +2,143 @@
 
 {% block content %}
 
-<h2>{{product.name}}</h2>
+<div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
 
-<p>{{product.description}}</p>
+    <!-- Product Image Section -->
+    <div>
+        <div class="border rounded-lg overflow-hidden">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="w-full h-auto">
+            {% else %}
+            <img src="https://picsum.photos/seed/{{product.slug}}/900/900">
+            {% endif %}
+        </div>
 
-<p>Price: {{product.price}}</p>
+        <!-- Thumbnail gallery (placeholder) -->
+        <div class="flex gap-3 mt-4">
+            {% for i in "1234" %}
+            <img src="https://picsum.photos/seed/{{product.slug}}{{i}}/150/150"
+                 class="w-20 h-20 border rounded cursor-pointer hover:border-pink-600">
+            {% endfor %}
+        </div>
+    </div>
 
-<a href="/cart/add/{{product.id}}/">Add to Cart</a>
+    <!-- Product Info -->
+    <div>
+
+        <h1 class="text-2xl font-bold mb-2">
+            {{ product.name }}
+        </h1>
+
+        <p class="text-xl text-red-500 font-bold mb-4">
+            {{ product.price }} ৳
+        </p>
+
+        <p class="text-gray-600 mb-6">
+            {{ product.description }}
+        </p>
+
+        <!-- Quantity -->
+        <div class="flex items-center gap-3 mb-4">
+            <input type="number" value="1" class="border p-2 w-20">
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex gap-3 mb-4">
+
+            <a href="/cart/add/{{product.id}}/"
+               class="bg-pink-600 text-white px-6 py-2 rounded font-semibold">
+               Add to Cart
+            </a>
+
+            <a href="/orders/checkout/"
+               class="bg-red-500 text-white px-6 py-2 rounded font-semibold">
+               Buy Now
+            </a>
+
+        </div>
+
+        <!-- Contact Buttons -->
+        <div class="space-y-3">
+
+            <a href="https://wa.me/8801819998542"
+               class="block bg-green-700 text-white text-center py-2 rounded">
+               WhatsApp: 01819998542
+            </a>
+
+            <a href="tel:01819998542"
+               class="block bg-green-700 text-white text-center py-2 rounded">
+               Call: 01819998542
+            </a>
+
+        </div>
+
+        <!-- Delivery Info -->
+        <div class="mt-6 border p-4 bg-blue-50 rounded">
+            <p>ঢাকার ভিতরে ৮০ টাকা</p>
+            <p>ঢাকার বাইরে ১২০ টাকা</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Product Details -->
+<div class="max-w-7xl mx-auto px-4 py-10">
+
+    <h2 class="text-xl font-bold mb-4">
+        Product Details
+    </h2>
+
+    <p class="text-gray-700">
+        {{ product.description }}
+    </p>
+
+</div>
+
+
+<!-- Related Products -->
+<div class="max-w-7xl mx-auto px-4 py-10">
+
+    <h2 class="text-xl font-bold mb-6">
+        Related Products
+    </h2>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+        {% for p in product.category.product_set.all|slice:":4" %}
+
+        {% if p.id != product.id %}
+
+        <div class="border rounded shadow-sm hover:shadow-md p-3">
+
+            <a href="{% url 'catalog:product_detail' p.slug %}">
+
+                {% if p.image %}
+                <img src="{{p.image.url}}" class="w-full h-56 object-cover rounded">
+                {% else %}
+                <img src="https://picsum.photos/seed/{{p.slug}}/400/400">
+                {% endif %}
+
+                <h4 class="mt-2 font-semibold">
+                    {{p.name}}
+                </h4>
+
+                <p class="text-pink-600 font-bold">
+                    {{p.price}} ৳
+                </p>
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</div>
 
 {% endblock %}
